@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - "8001:8000"
     volumes:
       - .:/app/src/
     restart: always
@@ -17,7 +17,7 @@ services:
     environment:
       GESTAO_HOST: 0.0.0.0
       GESTAO_DB_HOST: gestao-db
-      GESTAO_DB_PORT: 5432
+      GESTAO_DB_PORT: 5433
       GESTAO_DB_USER: gestao
       GESTAO_DB_PASS: gestao
       GESTAO_DB_BASE: gestao
@@ -26,6 +26,8 @@ services:
   db:
     image: postgres
     hostname: gestao-db
+    ports:
+      - "5433:5432"
     environment:
       POSTGRES_PASSWORD: "gestao"
       POSTGRES_USER: "gestao"
@@ -47,7 +49,7 @@ services:
     command: alembic upgrade head
     environment:
       GESTAO_DB_HOST: gestao-db
-      GESTAO_DB_PORT: 5432
+      GESTAO_DB_PORT: 5433
       GESTAO_DB_USER: gestao
       GESTAO_DB_PASS: gestao
       GESTAO_DB_BASE: gestao
