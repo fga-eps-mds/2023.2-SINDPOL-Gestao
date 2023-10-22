@@ -1,12 +1,11 @@
-import ormar
 from datetime import date, datetime
+
+import ormar
 
 from gestao.db.base import BaseMeta
 
 
 class User(ormar.Model):
-    """User model."""
-
     class Meta(BaseMeta):
         tablename = "user"
 
@@ -40,4 +39,8 @@ class User(ormar.Model):
     dispatcher: str = ormar.String(max_length=200)
     dispatched_date: date = ormar.Date()
     created_at: datetime = ormar.DateTime(timezone=True, default=datetime.now)
-    updated_at: datetime = ormar.DateTime(timezone=True, default=datetime.now, onupdate=datetime.now)
+    updated_at: datetime = ormar.DateTime(
+        timezone=True,
+        default=datetime.now,
+        onupdate=datetime.now,
+    )
