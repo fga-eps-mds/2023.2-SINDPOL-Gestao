@@ -1,7 +1,13 @@
 from datetime import date
-from typing import Optional
+from typing import List, Optional
 
 from pydantic import BaseModel
+
+
+class CreateUserDependentDTO(BaseModel):
+    name: str
+    birth_date: date
+    relationship: str
 
 
 class CreateUserDTO(BaseModel):
@@ -33,6 +39,7 @@ class CreateUserDTO(BaseModel):
     pattern: str
     dispatcher: str
     dispatched_date: date
+    dependents: Optional[List[CreateUserDependentDTO]]
 
 
 class UpdateUserDTO(BaseModel):
