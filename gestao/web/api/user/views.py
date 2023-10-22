@@ -1,6 +1,6 @@
 from typing import List
-
 from uuid import uuid4
+
 from fastapi import APIRouter, HTTPException
 
 from gestao.db.models.user import User
