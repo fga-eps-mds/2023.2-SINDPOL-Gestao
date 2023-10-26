@@ -93,3 +93,8 @@ class UpdateUserDTO(BaseModel):
     pattern: Optional[str]
     dispatcher: Optional[str]
     dispatched_date: Optional[date]
+
+
+class AuthUserDTO(BaseModel):
+    registration: str
+    password: str
