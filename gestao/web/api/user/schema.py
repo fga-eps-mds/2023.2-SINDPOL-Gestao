@@ -10,6 +10,7 @@ class CreateUserDependentDTO(BaseModel):
     birth_date: date
     gender: str
     relationship: str
+    deceased: bool
 
 
 class UpdateUserDependentDTO(BaseModel):
@@ -18,6 +19,7 @@ class UpdateUserDependentDTO(BaseModel):
     birth_date: Optional[date]
     gender: Optional[str]
     relationship: Optional[str]
+    deceased: Optional[bool]
 
 
 class CreateUserDTO(BaseModel):
