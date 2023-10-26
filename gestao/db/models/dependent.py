@@ -13,8 +13,11 @@ class Dependent(ormar.Model):
     id: str = ormar.String(max_length=200, primary_key=True)
     user_id: User = ormar.ForeignKey(User, ondelete=ormar.ReferentialAction.CASCADE)
     name: str = ormar.String(max_length=200)
+    cpf: str = ormar.String(max_length=200, unique=True)
     birth_date: date = ormar.Date()
+    gender: str = ormar.String(max_length=200)
     relationship: str = ormar.String(max_length=200)
+    deceased: bool = ormar.Boolean(default=False)
     created_at: datetime = ormar.DateTime(timezone=True, default=datetime.now)
     updated_at: datetime = ormar.DateTime(
         timezone=True,
