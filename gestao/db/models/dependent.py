@@ -17,7 +17,6 @@ class Dependent(ormar.Model):
     birth_date: date = ormar.Date()
     gender: str = ormar.String(max_length=200)
     relationship: str = ormar.String(max_length=200)
-    phone: str = ormar.String(max_length=200)
     deceased: bool = ormar.Boolean(default=False)
     created_at: datetime = ormar.DateTime(timezone=True, default=datetime.now)
     updated_at: datetime = ormar.DateTime(
