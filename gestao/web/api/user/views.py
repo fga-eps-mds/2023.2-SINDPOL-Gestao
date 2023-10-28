@@ -6,7 +6,7 @@ from fastapi import APIRouter, HTTPException
 
 from gestao.db.models.dependent import Dependent
 from gestao.db.models.user import User
-from gestao.web.api.user.schema import CreateUserDTO, UpdateUserDTO
+from gestao.web.api.user.schema import CreateUserDTO, UpdateUserDTO, AuthUserDTO
 
 router = APIRouter()
 
@@ -77,3 +77,18 @@ async def delete_user(user_id: str) -> None:
             status_code=404,
             detail="Error occurred while deleting user",
         )
+
+
+@router.get("_auth/login")
+async def user_auth(user_data: AuthUserDTO) -> User:
+    try:
+        user_data_dict = user_data.dict()
+        return await User.objects.get(
+            registration=user_data_dict['registration'],
+            password=user_data_dict['password']
+        )
+    except Exception:
+        logging.error("Error occurred in user_login", exc_info=True)
+        raise HTTPException(status_code=404, detail="Error occurred in login user")
+
+
