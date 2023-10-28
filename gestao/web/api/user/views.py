@@ -88,7 +88,7 @@ async def user_auth(user_data: AuthUserDTO) -> User:
             password=user_data_dict['password']
         )
     except Exception:
-        logging.error("Error occurred while get user", exc_info=True)
-        raise HTTPException(status_code=404, detail="User not found")
+        logging.error("Error occurred in user_login", exc_info=True)
+        raise HTTPException(status_code=404, detail="Error occurred in login user")
 
 

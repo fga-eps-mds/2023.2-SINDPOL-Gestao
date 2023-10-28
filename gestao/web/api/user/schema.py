@@ -3,34 +3,19 @@ from typing import List, Optional
 
 from pydantic import BaseModel
 
-
-class CreateUserDependentDTO(BaseModel):
-    name: str
-    cpf: str
-    birth_date: date
-    gender: str
-    relationship: str
-    deceased: bool
-
-
-class UpdateUserDependentDTO(BaseModel):
-    name: Optional[str]
-    cpf: Optional[str]
-    birth_date: Optional[date]
-    gender: Optional[str]
-    relationship: Optional[str]
-    deceased: Optional[bool]
+from gestao.web.api.dependent.schema import CreateUserDependentDTO
 
 
 class CreateUserDTO(BaseModel):
     name: str
-    war_name: str
+    registration: str
     password: str
-    address: str
-    neighborhood: str
-    city: str
-    state: str
+    war_name: str
     zipcode: str
+    address: str
+    state: str
+    city: str
+    neighborhood: str
     cpf: str
     rg: str
     rg_consignor: str
@@ -50,7 +35,6 @@ class CreateUserDTO(BaseModel):
     email: str
     marital_status: str
     education: str
-    registration: str
     role: str
     category: str
     pattern: str
@@ -61,13 +45,14 @@ class CreateUserDTO(BaseModel):
 
 class UpdateUserDTO(BaseModel):
     name: Optional[str]
-    war_name: Optional[str]
+    registration: Optional[str]
     password: Optional[str]
-    address: Optional[str]
-    neighborhood: Optional[str]
-    city: Optional[str]
-    state: Optional[str]
+    war_name: Optional[str]
     zipcode: Optional[str]
+    address: Optional[str]
+    state: Optional[str]
+    city: Optional[str]
+    neighborhood: Optional[str]
     cpf: Optional[str]
     rg: Optional[str]
     rg_consignor: Optional[str]
@@ -87,7 +72,6 @@ class UpdateUserDTO(BaseModel):
     email: Optional[str]
     marital_status: Optional[str]
     education: Optional[str]
-    registration: Optional[str]
     role: Optional[str]
     category: Optional[str]
     pattern: Optional[str]
