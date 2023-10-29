@@ -1,4 +1,5 @@
 from datetime import date, datetime
+from typing import Optional
 
 import ormar
 
@@ -36,6 +37,8 @@ class User(ormar.Model):
     role: str = ormar.String(max_length=200)
     category: str = ormar.String(max_length=200)
     pattern: str = ormar.String(max_length=200)
+    workstation: Optional[str] = ormar.String(max_length=200, nullable=True)
+    nickname: Optional[str] = ormar.String(max_length=200, unique=True, nullable=True)
     dispatcher: str = ormar.String(max_length=200)
     dispatched_date: date = ormar.Date()
     created_at: datetime = ormar.DateTime(timezone=True, default=datetime.now)
