@@ -8,6 +8,10 @@ class CreateUserDependentDTO(BaseModel):
     name: str
     birth_date: date
     relationship: str
+    cpf: str
+    gender: str
+    phone: str
+    pensioner: Optional[str]
 
 
 class CreateUserDTO(BaseModel):
@@ -40,6 +44,8 @@ class CreateUserDTO(BaseModel):
     dispatcher: str
     dispatched_date: date
     dependents: Optional[List[CreateUserDependentDTO]]
+    workstation: Optional[str]
+    nickname: Optional[str]
 
 
 class UpdateUserDTO(BaseModel):
@@ -71,3 +77,6 @@ class UpdateUserDTO(BaseModel):
     pattern: Optional[str]
     dispatcher: Optional[str]
     dispatched_date: Optional[date]
+    workstation: Optional[str]
+    nickname: Optional[str]
+    status: Optional[str]
