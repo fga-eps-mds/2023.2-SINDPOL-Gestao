@@ -85,7 +85,6 @@ It's configured using .pre-commit-config.yaml file.
 
 By default it runs:
 * black (formats your code);
-* mypy (validates types);
 * isort (sorts imports in all files);
 
 

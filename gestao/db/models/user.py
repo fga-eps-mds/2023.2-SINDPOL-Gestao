@@ -37,6 +37,7 @@ class User(ormar.Model):
     role: str = ormar.String(max_length=200)
     category: str = ormar.String(max_length=200)
     pattern: str = ormar.String(max_length=200)
+    status: str = ormar.String(max_length=200, default="active")
     workstation: Optional[str] = ormar.String(max_length=200, nullable=True)
     nickname: Optional[str] = ormar.String(max_length=200, unique=True, nullable=True)
     dispatcher: str = ormar.String(max_length=200)

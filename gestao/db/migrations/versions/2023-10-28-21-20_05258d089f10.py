@@ -23,9 +23,13 @@ def upgrade():
         batch_op.add_column(
             sa.Column("nickname", sa.String(200), nullable=True),
         )
+        batch_op.add_column(
+            sa.Column("status", sa.String(200), default="active"),
+        )
 
 
 def downgrade():
     with op.batch_alter_table("user") as batch_op:
         batch_op.drop_column("workstation")
         batch_op.drop_column("nickname")
+        batch_op.drop_column("status")

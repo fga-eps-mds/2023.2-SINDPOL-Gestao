@@ -79,3 +79,4 @@ class UpdateUserDTO(BaseModel):
     dispatched_date: Optional[date]
     workstation: Optional[str]
     nickname: Optional[str]
+    status: Optional[str]
