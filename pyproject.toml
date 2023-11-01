@@ -51,8 +51,8 @@ filterwarnings = [
     "ignore:.*unclosed.*:ResourceWarning",
 ]
 env = [
-    "GESTAO_ENVIRONMENT=pytest",
-    "GESTAO_DB_BASE=gestao_test",
+    "ENVIRONMENT=pytest",
+    "DB_BASE=gestao_test",
 ]
 
 [fastapi-template.options]

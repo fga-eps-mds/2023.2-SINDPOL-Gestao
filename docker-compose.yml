@@ -16,14 +16,14 @@ services:
     depends_on:
     - db
     environment:
-      GESTAO_HOST: 0.0.0.0
-      GESTAO_PORT: 8001
-      GESTAO_DB_HOST: gestao-db
-      GESTAO_DB_PORT: 5432
-      GESTAO_DB_USER: gestao
-      GESTAO_DB_PASS: gestao
-      GESTAO_DB_BASE: gestao
-      GESTAO_RELOAD: "True"
+      HOST: 0.0.0.0
+      PORT: 8001
+      DB_HOST: gestao-db
+      DB_PORT: 5432
+      DB_USER: gestao
+      DB_PASS: gestao
+      DB_BASE: gestao
+      RELOAD: "True"
     networks:
     - sindpol_network
 
@@ -54,11 +54,11 @@ services:
     restart: "no"
     command: alembic upgrade head
     environment:
-      GESTAO_DB_HOST: gestao-db
-      GESTAO_DB_PORT: 5432
-      GESTAO_DB_USER: gestao
-      GESTAO_DB_PASS: gestao
-      GESTAO_DB_BASE: gestao
+      DB_HOST: gestao-db
+      DB_PORT: 5432
+      DB_USER: gestao
+      DB_PASS: gestao
+      DB_BASE: gestao
     depends_on:
     - db
     networks:
