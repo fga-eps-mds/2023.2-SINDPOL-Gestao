@@ -28,7 +28,7 @@ class CreateUserDTO(BaseModel):
     blood_type: str
     gender: str
     father_name: str
-    mother_date: str
+    mother_name: str
     position: str
     occupancy: str
     admission_date: date
@@ -46,6 +46,7 @@ class CreateUserDTO(BaseModel):
     dependents: Optional[List[CreateUserDependentDTO]]
     workstation: Optional[str]
     nickname: Optional[str]
+    password: str
 
 
 class UpdateUserDTO(BaseModel):
@@ -62,7 +63,7 @@ class UpdateUserDTO(BaseModel):
     blood_type: Optional[str]
     gender: Optional[str]
     father_name: Optional[str]
-    mother_date: Optional[str]
+    mother_name: Optional[str]
     position: Optional[str]
     occupancy: Optional[str]
     admission_date: Optional[date]
@@ -80,3 +81,9 @@ class UpdateUserDTO(BaseModel):
     workstation: Optional[str]
     nickname: Optional[str]
     status: Optional[str]
+    password: Optional[str]
+
+
+class AuthUserDTO(BaseModel):
+    registration: str
+    password: str

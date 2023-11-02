@@ -8,7 +8,7 @@ from fastapi import APIRouter, HTTPException
 from gestao.db.models.dependent import Dependent
 from gestao.db.models.user import User
 from gestao.web.api.user.enums import UserStatus
-from gestao.web.api.user.schemas import CreateUserDTO, UpdateUserDTO
+from gestao.web.api.user.schemas import CreateUserDTO, UpdateUserDTO, AuthUserDTO
 
 router = APIRouter()
 
@@ -104,6 +104,24 @@ async def disable_user(user_id: str) -> None:
         return {"detail": "User disabled successfully"}
     except Exception:
         logging.error("User not found", exc_info=True)
+        raise HTTPException(
+            status_code=404,
+            detail="User not found",
+        )
+
+
+@router.get("_auth/login", response_model_exclude={"dependents__user_id"})
+async def login_user(user_data: AuthUserDTO) -> User:
+    try:
+        user_data_dict = user_data.dict()
+        return await User.objects.select_related(
+            User.dependents,
+        ).get(
+            registration=user_data_dict["registration"],
+            password=user_data_dict["password"],
+        )
+    except Exception:
+        logging.error("Error occurred in login user", exc_info=True)
         raise HTTPException(
             status_code=404,
             detail="User not found",
