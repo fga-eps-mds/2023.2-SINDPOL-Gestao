@@ -57,18 +57,16 @@ This application can be configured with environment variables.
 You can create `.env` file in the root directory and place all
 environment variables here.
 
-All environment variables should start with "GESTAO_" prefix.
-
 For example if you see in your "gestao/settings.py" a variable named like
-`random_parameter`, you should provide the "GESTAO_RANDOM_PARAMETER"
+`random_parameter`, you should provide the "RANDOM_PARAMETER"
 variable to configure the value. This behaviour can be changed by overriding `env_prefix` property
 in `gestao.settings.Settings.Config`.
 
 An example of .env file:
 ```bash
-GESTAO_RELOAD="True"
-GESTAO_PORT="8000"
-GESTAO_ENVIRONMENT="dev"
+RELOAD="True"
+PORT="8000"
+ENVIRONMENT="dev"
 ```
 
 You can read more about BaseSettings class here: https://pydantic-docs.helpmanual.io/usage/settings/
@@ -85,9 +83,7 @@ It's configured using .pre-commit-config.yaml file.
 
 By default it runs:
 * black (formats your code);
-* mypy (validates types);
 * isort (sorts imports in all files);
-* flake8 (spots possible bugs);
 
 
 You can read more about pre-commit here: https://pre-commit.com/

@@ -5,41 +5,47 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    hostname: gestao
     ports:
-      - "8001:8000"
+    - "8001:8001"
     volumes:
-      - .:/app/src/
+    - .:/app/src/
     restart: always
     env_file:
-      - .env
+    - .env
     depends_on:
-      - db
+    - db
     environment:
-      GESTAO_HOST: 0.0.0.0
-      GESTAO_DB_HOST: gestao-db
-      GESTAO_DB_PORT: 5433
-      GESTAO_DB_USER: gestao
-      GESTAO_DB_PASS: gestao
-      GESTAO_DB_BASE: gestao
-      GESTAO_RELOAD: "True"
+      HOST: 0.0.0.0
+      PORT: 8001
+      DB_HOST: gestao-db
+      DB_PORT: 5432
+      DB_USER: gestao
+      DB_PASS: gestao
+      DB_BASE: gestao
+      RELOAD: "True"
+    networks:
+    - sindpol_network
 
   db:
     image: postgres
     hostname: gestao-db
     ports:
-      - "5433:5432"
+    - "5433:5432"
     environment:
       POSTGRES_PASSWORD: "gestao"
       POSTGRES_USER: "gestao"
       POSTGRES_DB: "gestao"
     volumes:
-      - gestao-db-data:/var/lib/postgresql/data
+    - gestao-db-data:/var/lib/postgresql/data
     restart: always
     healthcheck:
       test: pg_isready -U gestao
       interval: 2s
       timeout: 3s
       retries: 40
+    networks:
+    - sindpol_network
 
   migrator:
     build:
@@ -48,14 +54,21 @@ services:
     restart: "no"
     command: alembic upgrade head
     environment:
-      GESTAO_DB_HOST: gestao-db
-      GESTAO_DB_PORT: 5433
-      GESTAO_DB_USER: gestao
-      GESTAO_DB_PASS: gestao
-      GESTAO_DB_BASE: gestao
+      DB_HOST: gestao-db
+      DB_PORT: 5432
+      DB_USER: gestao
+      DB_PASS: gestao
+      DB_BASE: gestao
     depends_on:
-      - db
+    - db
+    networks:
+    - sindpol_network
 
 volumes:
   gestao-db-data:
     name: gestao-db-data
+
+networks:
+  sindpol_network:
+    external: true
+    driver: 'bridge'
