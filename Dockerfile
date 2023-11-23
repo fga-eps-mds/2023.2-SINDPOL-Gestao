@@ -1,6 +1,7 @@
 FROM python:3.11.4-slim-bullseye
 RUN apt-get update && apt-get install -y \
   gcc \
+  libreoffice \
   && rm -rf /var/lib/apt/lists/*
 
 

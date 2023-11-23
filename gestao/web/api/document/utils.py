@@ -40,3 +40,24 @@ def generate_affiliation_file(user: User):
     file_stream.seek(0)
 
     return file_stream
+
+
+def convert_file(file_stream):
+    import subprocess
+    import os
+
+    docx_name = "tmp_file.docx"
+    pdf_name = "tmp_file.pdf"
+    
+    with open(docx_name, "wb") as tmp_file:
+        tmp_file.write(file_stream.getvalue())
+    
+    subprocess.call(["libreoffice", "--headless", "--convert-to", "pdf", docx_name])
+
+    with open(pdf_name, "rb") as file_out:
+        file_content = file_out.read()
+    
+    os.remove(docx_name)
+    os.remove(pdf_name)
+    
+    return io.BytesIO(file_content)
