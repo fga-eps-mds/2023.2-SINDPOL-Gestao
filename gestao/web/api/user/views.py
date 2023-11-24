@@ -46,7 +46,7 @@ async def create_user(create_user: CreateUserDTO) -> User:
         dependents = create_user_dict.pop("dependents", [])
         user_id = str(uuid4())
         await User.objects.create(
-            id=user_id, **create_user_dict, status=UserStatus.active
+            id=user_id, **create_user_dict, status=UserStatus.analyzing
         )
         if dependents:
             await Dependent.objects.bulk_create(
@@ -102,6 +102,20 @@ async def disable_user(user_id: str) -> None:
         user = await User.objects.get(id=user_id)
         await user.update(status=UserStatus.inactive)
         return {"detail": "User disabled successfully"}
+    except Exception:
+        logging.error("User not found", exc_info=True)
+        raise HTTPException(
+            status_code=404,
+            detail="User not found",
+        )
+
+
+@router.patch("/{user_id}/enable")
+async def enable_user(user_id: str) -> None:
+    try:
+        user = await User.objects.get(id=user_id)
+        await user.update(status=UserStatus.active)
+        return {"detail": "User enable successfully"}
     except Exception:
         logging.error("User not found", exc_info=True)
         raise HTTPException(
