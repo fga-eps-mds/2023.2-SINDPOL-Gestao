@@ -29,7 +29,13 @@ def generate_affiliation_file(user: User):
     docx_replace(
         doc,
         **{
-            "cpf": user.cpf[:3] + '.' + user.cpf[3:6] + '.' + user.cpf[6:9] + '-' + user.cpf[9:],
+            "cpf": user.cpf[:3]
+            + "."
+            + user.cpf[3:6]
+            + "."
+            + user.cpf[6:9]
+            + "-"
+            + user.cpf[9:],
             "name": user.name,
             "date": date_string,
         },
@@ -48,16 +54,16 @@ def convert_file(file_stream):
 
     docx_name = "tmp_file.docx"
     pdf_name = "tmp_file.pdf"
-    
+
     with open(docx_name, "wb") as tmp_file:
         tmp_file.write(file_stream.getvalue())
-    
+
     subprocess.call(["libreoffice", "--headless", "--convert-to", "pdf", docx_name])
 
     with open(pdf_name, "rb") as file_out:
         file_content = file_out.read()
-    
+
     os.remove(docx_name)
     os.remove(pdf_name)
-    
+
     return io.BytesIO(file_content)

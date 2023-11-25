@@ -15,9 +15,7 @@ async def get_user_affiliation(user_id: str) -> None:
         pdf_file_stream = convert_file(file_stream)
         return StreamingResponse(
             pdf_file_stream,
-            media_type=(
-                "application/pdf"
-            ),
+            media_type=("application/pdf"),
         )
     except Exception:
         logging.error("Error occurred while get user", exc_info=True)
