@@ -16,7 +16,7 @@ def generate_fake_user():
         "blood_type": "A+",
         "gender": "M",
         "father_name": f"{f.name()}",
-        "mother_date": f"{f.name()}",
+        "mother_name": f"{f.name()}",
         "position": "null",
         "occupancy": "null",
         "admission_date": f"{f.date_of_birth()}",
