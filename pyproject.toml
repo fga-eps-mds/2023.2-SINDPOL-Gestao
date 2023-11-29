@@ -23,6 +23,8 @@ alembic = "^1.11.1"
 asyncpg = "^0.28.0"
 psycopg2-binary = "^2.9.6"
 httptools = "^0.6.0"
+pytest = "^7.4.3"
+faker = "^20.1.0"
 
 
 [tool.poetry.dev-dependencies]
