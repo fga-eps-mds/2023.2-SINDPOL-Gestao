@@ -37,9 +37,6 @@ def upgrade():
             sa.Column("civilState", sa.String(100), nullable=True),
         )
         batch_op.add_column(
-            sa.Column("civilState", sa.String(100), nullable=True),
-        )
-        batch_op.add_column(
             sa.Column("cep", sa.String(100), nullable=True),
         )
         batch_op.add_column(
@@ -73,22 +70,22 @@ def upgrade():
             sa.Column("admissionDate", sa.Date()),
         )
         batch_op.add_column(
-            sa.Column("jobRole", sa.string(200), nullable=True),
+            sa.Column("jobRole", sa.String(200), nullable=True),
         )
         batch_op.add_column(
-            sa.Column("bodyOfLaw", sa.string(200)),
+            sa.Column("bodyOfLaw", sa.String(200)),
         )
         batch_op.add_column(
-            sa.Column("lotation", sa.string(200), nullable=True),
+            sa.Column("lotation", sa.String(200), nullable=True),
         )
         batch_op.add_column(
-            sa.Column("workPost", sa.string(200), nullable=True),
+            sa.Column("workPost", sa.String(200), nullable=True),
         )
         batch_op.add_column(
-            sa.Column("systemRole", sa.string(200), nullable=True),
+            sa.Column("systemRole", sa.String(200), nullable=True),
         )
         batch_op.add_column(
-            sa.Column("password", sa.string(200), nullable=True),
+            sa.Column("password", sa.String(200), nullable=True),
         )
 
 
