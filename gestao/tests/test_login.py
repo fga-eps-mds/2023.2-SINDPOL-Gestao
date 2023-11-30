@@ -25,33 +25,35 @@ async def test_login_user_correct(client: AsyncClient, fastapi_app: FastAPI) -> 
     assert response.status_code == 200
     user_data = response.json()
     user_credentials = {
-        'registration': user_data['registration'],
-        'password': user_data['password'],
+        "registration": user_data["registration"],
+        "password": user_data["password"],
     }
 
-    url = fastapi_app.url_path_for('login_user')
+    url = fastapi_app.url_path_for("login_user")
     response = await client.post(url, json=user_credentials)
     assert response.status_code == 200
-    
-    
+
+
 @pytest.mark.anyio
 async def test_login_user_incorrect(client: AsyncClient, fastapi_app: FastAPI) -> None:
     user_credentials = {
-        'registration': 'email@example.com',
-        'password': 'password_example',
+        "registration": "email@example.com",
+        "password": "password_example",
     }
 
-    url = fastapi_app.url_path_for('login_user')
+    url = fastapi_app.url_path_for("login_user")
     response = await client.post(url, json=user_credentials)
     assert response.status_code == 404
 
 
 @pytest.mark.anyio
-async def test_recover_password_incorrect(client: AsyncClient, fastapi_app: FastAPI) -> None:
+async def test_recover_password_incorrect(
+    client: AsyncClient, fastapi_app: FastAPI
+) -> None:
     user_credentials = {
-        'email': 'email@example.com',
+        "email": "email@example.com",
     }
 
-    url = fastapi_app.url_path_for('recover_password')
+    url = fastapi_app.url_path_for("recover_password")
     response = await client.post(url, json=user_credentials)
     assert response.status_code == 404
