@@ -109,9 +109,9 @@ async def test_disable_user_correct(client: AsyncClient, fastapi_app: FastAPI) -
      user_Alexandre=response.json()
      var = user_Alexandre["id"]
 
-    url = fastapi_app.url_path_for("disable_user", user_id=var)
-    response = await client.patch(url)
-    assert response.status_code == 200
+url = fastapi_app.url_path_for("disable_user", user_id=var)
+response = await client.patch(url)
+assert response.status_code == 200
 
 @pytest.mark.anyio
 async def test_enable_user_correct(client: AsyncClient, fastapi_app: FastAPI) -> None:
@@ -122,9 +122,9 @@ async def test_enable_user_correct(client: AsyncClient, fastapi_app: FastAPI) ->
      user_Alexandre=response.json()
      var = user_Alexandre["id"]
 
-    url = fastapi_app.url_path_for("enable_user", user_id=var)
-    response = await client.patch(url)
-    assert response.status_code == 200
+url = fastapi_app.url_path_for("enable_user", user_id=var)
+response = await client.patch(url)
+assert response.status_code == 200
 
 
 @pytest.mark.anyio 
