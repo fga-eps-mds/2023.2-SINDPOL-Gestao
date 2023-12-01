@@ -3,6 +3,7 @@ from typing import Optional
 from gestao.db.base import BaseMeta
 import ormar
 
+
 class User(ormar.Model):
     class Meta(BaseMeta):
         tablename = "user"

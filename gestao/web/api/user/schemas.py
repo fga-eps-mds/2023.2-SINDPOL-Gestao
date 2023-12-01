@@ -3,6 +3,7 @@ from typing import List, Optional
 
 from pydantic import BaseModel
 
+
 class CreateUserDependentDTO(BaseModel):
     name: str
     birth_date: date
@@ -11,6 +12,7 @@ class CreateUserDependentDTO(BaseModel):
     gender: str
     phone: str
     pensioner: Optional[str]
+
 
 class CreateUserDTO(BaseModel):
     fullName: str
@@ -47,6 +49,7 @@ class CreateUserDTO(BaseModel):
     jobRole: str
     dependents: Optional[List[CreateUserDependentDTO]]
     password: str
+
 
 class UpdateUserDTO(BaseModel):
     fullName: Optional[str]
