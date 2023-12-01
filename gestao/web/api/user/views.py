@@ -23,7 +23,7 @@ async def get_users(
         .offset(
             offset,
         )
-        .filter(status=UserStatus.active)
+        # .filter(status=UserStatus.active)
         .all()
     )
 

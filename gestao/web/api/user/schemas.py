@@ -25,6 +25,7 @@ class CreateUserDTO(BaseModel):
     cep: str
     address: str
     number: Optional[str]
+    neighborhood: str
     city: str
     uf: str
     complement: Optional[str]
@@ -37,14 +38,15 @@ class CreateUserDTO(BaseModel):
     scolarity: Optional[str]
     religion: Optional[str]
     bloodType: Optional[str]
-    function: str
     actualWorkSituation: str
     admissionDate: date
     bodyOfLaw: str
     lotation: Optional[str]
     workPost: Optional[str]
     systemRole: Optional[str]
+    jobRole: str
     dependents: Optional[List[CreateUserDependentDTO]]
+    password: str
 
 class UpdateUserDTO(BaseModel):
     fullName: Optional[str]
@@ -59,6 +61,7 @@ class UpdateUserDTO(BaseModel):
     cep: Optional[str]
     address: Optional[str]
     number: Optional[str]
+    neighborhood: Optional[str]
     city: Optional[str]
     uf: Optional[str]
     complement: Optional[str]
@@ -71,10 +74,11 @@ class UpdateUserDTO(BaseModel):
     scolarity: Optional[str]
     religion: Optional[str]
     bloodType: Optional[str]
-    function: Optional[str]
     actualWorkSituation: Optional[str]
     admissionDate: Optional[date]
     bodyOfLaw: Optional[str]
     lotation: Optional[str]
     workPost: Optional[str]
+    jobRole: Optional[str]
     systemRole: Optional[str]
+    password: Optional[str]
