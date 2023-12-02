@@ -107,8 +107,8 @@ async def test_disable_user_correct(client: AsyncClient, fastapi_app: FastAPI) -
     user = generate_fake_user()
     response = await client.post(url, json=user)
     assert response.status_code == 200
-    user_Alexandre = response.json()
-    var = user_Alexandre["id"]
+    user_data = response.json()
+    var = user_data["id"]
 
     url = fastapi_app.url_path_for("disable_user", user_id=var)
     response = await client.patch(url)
@@ -121,8 +121,8 @@ async def test_enable_user_correct(client: AsyncClient, fastapi_app: FastAPI) ->
     user = generate_fake_user()
     response = await client.post(url, json=user)
     assert response.status_code == 200
-    user_Alexandre = response.json()
-    var = user_Alexandre["id"]
+    user_data = response.json()
+    var = user_data["id"]
 
     url = fastapi_app.url_path_for("enable_user", user_id=var)
     response = await client.patch(url)
