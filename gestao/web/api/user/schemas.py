@@ -29,8 +29,8 @@ class CreateUserDTO(BaseModel):
     number: Optional[str]
     neighborhood: str
     city: str
-    uf: str
     complement: Optional[str]
+    uf: str
     email: str
     cellphone: str
     phone: Optional[str]
@@ -42,13 +42,13 @@ class CreateUserDTO(BaseModel):
     bloodType: Optional[str]
     actualWorkSituation: str
     admissionDate: date
+    jobRole: str
     bodyOfLaw: str
     lotation: Optional[str]
     workPost: Optional[str]
     systemRole: Optional[str]
-    jobRole: str
     dependents: Optional[List[CreateUserDependentDTO]]
-    password: str
+    password: Optional[str]
 
 
 class UpdateUserDTO(BaseModel):

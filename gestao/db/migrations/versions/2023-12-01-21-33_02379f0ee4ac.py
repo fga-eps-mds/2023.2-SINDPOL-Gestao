@@ -157,3 +157,34 @@ def downgrade() -> None:
         ),
         schema="public",
     )
+
+    op.create_table(
+        "dependent",
+        sa.Column("id", sa.String(length=200), primary_key=True, nullable=False),
+        sa.Column(
+            "user_id",
+            sa.String(length=200),
+            sa.ForeignKey("user.id", ondelete="CASCADE"),
+            nullable=False,
+        ),
+        sa.Column("name", sa.String(length=200), nullable=False),
+        sa.Column("birth_date", sa.Date(), nullable=False),
+        sa.Column("relationship", sa.String(length=200), nullable=False),
+        sa.Column("cpf", sa.String(200), nullable=True, unique=True),
+        sa.Column("gender", sa.String(200), nullable=True),
+        sa.Column("phone", sa.String(200), nullable=True),
+        sa.Column("pensioner", sa.Boolean(), default=False),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+        schema="public",
+    )
