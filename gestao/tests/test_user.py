@@ -49,7 +49,7 @@ async def test_create_user_correct(client: AsyncClient, fastapi_app: FastAPI) ->
 async def test_create_user_incorrect(client: AsyncClient, fastapi_app: FastAPI) -> None:
     url = fastapi_app.url_path_for("create_user")
     user = generate_fake_user()
-    user.pop("name")
+    user.pop("fullName")
     response = await client.post(url, json=user)
     assert response.status_code == 422
 
@@ -67,7 +67,7 @@ async def test_update_user_correct(client: AsyncClient, fastapi_app: FastAPI) ->
     response = await client.put(
         url,
         json={
-            "name": "pedro",
+            "fullName": "pedro",
         },
     )
     assert response.status_code == 200
