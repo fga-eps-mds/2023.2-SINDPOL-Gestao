@@ -48,3 +48,5 @@ jobs:
       env:
         HOST: "0.0.0.0"
         DB_HOST: localhost
+    - name: Generate Sonar-metrics
+      run: poetry run coverage xml -o coverage.xml
