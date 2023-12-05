@@ -11,16 +11,18 @@ def generate_password(length: int = 8) -> str:
     return password
 
 
-def send_email(user_name: str, user_email: str, user_message: str) -> None:
-
+def send_email(
+    user_name: str, user_email: str, new_password: str, logo_path: str
+) -> None:
     email_data = {
         "email_address": os.getenv("EMAIL_ADDRESS"),
         "email_password": os.getenv("EMAIL_PASSWORD"),
-        "email_subject": "recover-password SINDPOL-DF",
-        "email_body": """
-                        <p>recover-password<p>
-                        <p>name: {}<p>
-                        <p>new-password: {}<p>
+        "email_subject": "recover-password SG-SINDPOL",
+        "email_body": f"""
+                        <img src="{logo_path}" width=200 style="height: auto;">
+                        <p>recover-password system from SG-SINDPOL<p>
+                        <p>name: {user_name}<p>
+                        <p>new-password: {new_password}<p>
                     """,
     }
 
@@ -29,7 +31,7 @@ def send_email(user_name: str, user_email: str, user_message: str) -> None:
     msg["From"] = email_data["email_address"]
     msg["To"] = user_email
     msg.add_header("Content-Type", "text/html")
-    msg.set_payload(email_data["email_body"].format(user_name, user_message))
+    msg.set_payload(email_data["email_body"])
 
     s = smtplib.SMTP("smtp.gmail.com: 587")
     s.starttls()

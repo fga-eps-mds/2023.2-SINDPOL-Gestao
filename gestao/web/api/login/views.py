@@ -1,6 +1,6 @@
 import logging
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 
 from gestao.db.models.user import User
 from gestao.web.api.login.schemas import AuthUserDTO, RecoverPasswordDTO
@@ -24,11 +24,17 @@ async def login_user(login_data: AuthUserDTO) -> User:
 
 
 @router.post("/recover_password")
-async def recover_password(recover_data: RecoverPasswordDTO) -> None:
+async def recover_password(request: Request, recover_data: RecoverPasswordDTO) -> None:
     try:
+        url_logo = str(request.url_for("static", path="logo.png"))
         user = await User.objects.get(**recover_data.dict())
         new_password = generate_password()
-        send_email(user.name, user.email, new_password)
+        send_email(
+            user_name=user.fullName,
+            user_email=user.email,
+            new_password=new_password,
+            logo_path=url_logo,
+        )
         await user.update(password=new_password)
     except Exception:
         logging.error("User not found", exc_info=True)

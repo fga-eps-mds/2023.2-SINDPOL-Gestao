@@ -17,6 +17,26 @@ def test_generate_password_correct() -> None:
     assert len(password) == 15
 
 
+def test_generate_password_incorrect() -> None:
+    try:
+        password = generate_password("5")
+    except Exception as e:
+        assert type(e) == TypeError
+
+
+def test_send_email_incorrect() -> None:
+    send_email_value = None
+    try:
+        send_email_value = send_email(
+            user_name="joao",
+            user_email="joao@example.com",
+            new_password="null",
+            logo_path="null",
+        )
+    except Exception as e:
+        assert send_email_value is None
+
+
 @pytest.mark.anyio
 async def test_login_user_correct(client: AsyncClient, fastapi_app: FastAPI) -> None:
     url = fastapi_app.url_path_for("create_user")

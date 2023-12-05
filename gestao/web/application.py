@@ -3,6 +3,7 @@ from importlib import metadata
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import UJSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from gestao.web.api.router import api_router
 from gestao.web.lifetime import register_shutdown_event, register_startup_event
@@ -40,5 +41,7 @@ def get_app() -> FastAPI:
 
     # Main router for the API.
     app.include_router(router=api_router, prefix="/api")
+
+    app.mount("/api/static", StaticFiles(directory="files"), name="static")
 
     return app
