@@ -1,5 +1,6 @@
 import logging
 
+from smtplib import SMTPAuthenticationError
 from fastapi import APIRouter, HTTPException, Request
 
 from gestao.db.models.user import User
@@ -23,7 +24,7 @@ async def login_user(login_data: AuthUserDTO) -> User:
         )
 
 
-@router.post("/recover_password")
+@router.post("/recover-password")
 async def recover_password(request: Request, recover_data: RecoverPasswordDTO) -> None:
     try:
         url_logo = str(request.url_for("static", path="logo.png"))
@@ -36,6 +37,9 @@ async def recover_password(request: Request, recover_data: RecoverPasswordDTO) -
             logo_path=url_logo,
         )
         await user.update(password=new_password)
+    except SMTPAuthenticationError:
+        logging.error("Authentication error while sending email", exc_info=True)
+        raise HTTPException(status_code=400, detail='Authentication error while sending email')
     except Exception:
         logging.error("User not found", exc_info=True)
         raise HTTPException(status_code=404, detail="User not found")

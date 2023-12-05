@@ -16,7 +16,7 @@ def send_email(
 ) -> None:
     email_data = {
         "email_address": os.getenv("EMAIL_ADDRESS"),
-        "email_password": os.getenv("EMAIL_PASSWORD"),
+        "email_password": os.getenv("EMAIL_APP_PASSWORD"),
         "email_subject": "recover-password SG-SINDPOL",
         "email_body": f"""
                         <img src="{logo_path}" width=200 style="height: auto;">
