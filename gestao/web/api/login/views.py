@@ -39,7 +39,9 @@ async def recover_password(request: Request, recover_data: RecoverPasswordDTO) -
         await user.update(password=new_password)
     except SMTPAuthenticationError:
         logging.error("Authentication error while sending email", exc_info=True)
-        raise HTTPException(status_code=400, detail='Authentication error while sending email')
+        raise HTTPException(
+            status_code=400, detail="Authentication error while sending email"
+        )
     except Exception:
         logging.error("User not found", exc_info=True)
         raise HTTPException(status_code=404, detail="User not found")

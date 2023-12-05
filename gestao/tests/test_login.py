@@ -82,9 +82,10 @@ async def test_recover_password_incorrect(
     assert response.status_code == 404
 
 
-
 @pytest.mark.anyio
-async def test_recover_password_AuthenticationError(client: AsyncClient, fastapi_app: FastAPI) -> None:
+async def test_recover_password_AuthenticationError(
+    client: AsyncClient, fastapi_app: FastAPI
+) -> None:
     url = fastapi_app.url_path_for("create_user")
     user = generate_fake_user()
     response = await client.post(url, json=user)
@@ -94,7 +95,7 @@ async def test_recover_password_AuthenticationError(client: AsyncClient, fastapi
     assert isinstance(user_instance, User)
 
     user_credentials = {
-        "email": user_data['email'],
+        "email": user_data["email"],
     }
 
     url = fastapi_app.url_path_for("recover_password")

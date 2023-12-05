@@ -64,12 +64,14 @@ async def test_create_user_incorrect(client: AsyncClient, fastapi_app: FastAPI) 
 
 
 @pytest.mark.anyio
-async def test_create_user_UniqueViolation(client: AsyncClient, fastapi_app: FastAPI) -> None:
+async def test_create_user_UniqueViolation(
+    client: AsyncClient, fastapi_app: FastAPI
+) -> None:
     url = fastapi_app.url_path_for("create_user")
     user = generate_fake_user()
     response = await client.post(url, json=user)
     assert response.status_code == 200
-    
+
     response = await client.post(url, json=user)
     assert response.status_code == 400
 
