@@ -1,7 +1,7 @@
-import os
-import smtplib
 import email.message
+import os
 import secrets
+import smtplib
 import string
 
 
@@ -12,7 +12,10 @@ def generate_password(length: int = 8) -> str:
 
 
 def send_email(
-    user_name: str, user_email: str, new_password: str, logo_path: str
+    user_name: str,
+    user_email: str,
+    new_password: str,
+    logo_path: str,
 ) -> None:
     email_data = {
         "email_address": os.getenv("EMAIL_ADDRESS"),

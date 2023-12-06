@@ -1,8 +1,8 @@
+from uuid import uuid4
+
 import pytest
 from fastapi import FastAPI
 from httpx import AsyncClient
-from starlette import status
-from uuid import uuid4
 
 from gestao.db.models.user import User
 from gestao.tests.utils import generate_fake_user
@@ -65,7 +65,8 @@ async def test_create_user_incorrect(client: AsyncClient, fastapi_app: FastAPI) 
 
 @pytest.mark.anyio
 async def test_create_user_UniqueViolation(
-    client: AsyncClient, fastapi_app: FastAPI
+    client: AsyncClient,
+    fastapi_app: FastAPI,
 ) -> None:
     url = fastapi_app.url_path_for("create_user")
     user = generate_fake_user()
@@ -148,7 +149,8 @@ async def test_disable_user_correct(client: AsyncClient, fastapi_app: FastAPI) -
 
 @pytest.mark.anyio
 async def test_disable_user_incorrect(
-    client: AsyncClient, fastapi_app: FastAPI
+    client: AsyncClient,
+    fastapi_app: FastAPI,
 ) -> None:
     url = fastapi_app.url_path_for("disable_user", user_id=str(uuid4()))
     response = await client.patch(url)

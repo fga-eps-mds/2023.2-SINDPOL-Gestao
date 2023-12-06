@@ -39,5 +39,6 @@ async def recover_password(request: Request, recover_data: RecoverPasswordDTO) -
     except Exception:
         logging.error("Error occurred while sending email", exc_info=True)
         raise HTTPException(
-            status_code=400, detail="Error occurred while sending email"
+            status_code=400,
+            detail="Error occurred while sending email",
         )
