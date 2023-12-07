@@ -6,7 +6,6 @@ from fastapi import FastAPI
 from httpx import AsyncClient
 from starlette import status
 
-from gestao.tests.utils import generate_fake_user
 from gestao.web.api.document.utils import generate_report_users_file
 
 
