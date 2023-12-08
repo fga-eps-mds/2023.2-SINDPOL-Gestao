@@ -1,6 +1,6 @@
 from fastapi.routing import APIRouter
 
-from gestao.web.api import echo, monitoring, user, login
+from gestao.web.api import echo, login, monitoring, user
 
 api_router = APIRouter()
 api_router.include_router(monitoring.router)

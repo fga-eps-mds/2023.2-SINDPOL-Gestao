@@ -1,7 +1,8 @@
 from datetime import date, datetime
-from typing import Optional
-from gestao.db.base import BaseMeta
+
 import ormar
+
+from gestao.db.base import BaseMeta
 
 
 class User(ormar.Model):

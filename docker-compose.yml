@@ -24,8 +24,6 @@ services:
       DB_PASS: gestao
       DB_BASE: gestao
       RELOAD: "True"
-      EMAIL_ADDRESS: "YOUR EMAIL ADDRESS"
-      EMAIL_PASSWORD: "YOUR-EMAIL-PASSWORD"
     networks:
     - sindpol_network
 

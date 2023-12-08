@@ -67,6 +67,8 @@ An example of .env file:
 RELOAD="True"
 PORT="8000"
 ENVIRONMENT="dev"
+EMAIL_ADDRESS= "YOUR-EMAIL-ADDRESS"
+EMAIL_APP_PASSWORD= "YOUR-EMAIL-PASSWORD-FOR-APPs"
 ```
 
 You can read more about BaseSettings class here: https://pydantic-docs.helpmanual.io/usage/settings/
