@@ -44,6 +44,9 @@ async def create_user(create_user: CreateUserDTO) -> User:
         create_user_dict = create_user.dict()
         dependents = create_user_dict.pop("dependents", [])
         user_id = str(uuid4())
+
+        create_user_dict["password"] = create_user_dict["warName"]
+
         await User.objects.create(
             id=user_id, **create_user_dict, status=UserStatus.analyzing
         )
