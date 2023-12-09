@@ -14,8 +14,17 @@ router = APIRouter()
 
 
 @router.get("/", response_model_exclude={"dependents__user_id"})
-async def get_users(limit: int = 10, offset: int = 0,) -> List[User]:
-    return (await User.objects.limit(limit).offset(offset,).all())
+async def get_users(
+    limit: int = 10,
+    offset: int = 0,
+) -> List[User]:
+    return (
+        await User.objects.limit(limit)
+        .offset(
+            offset,
+        )
+        .all()
+    )
 
 
 @router.get("/{user_id}", response_model_exclude={"dependents__user_id"})
