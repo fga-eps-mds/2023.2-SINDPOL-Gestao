@@ -14,18 +14,8 @@ router = APIRouter()
 
 
 @router.get("/", response_model_exclude={"dependents__user_id"})
-async def get_users(
-    limit: int = 10,
-    offset: int = 0,
-) -> List[User]:
-    return (
-        await User.objects.limit(limit)
-        .offset(
-            offset,
-        )
-        .filter(status=UserStatus.active)
-        .all()
-    )
+async def get_users(limit: int = 10, offset: int = 0,) -> List[User]:
+    return (await User.objects.limit(limit).offset(offset,).all())
 
 
 @router.get("/{user_id}", response_model_exclude={"dependents__user_id"})
@@ -45,8 +35,9 @@ async def create_user(create_user: CreateUserDTO) -> User:
         create_user_dict = create_user.dict()
         dependents = create_user_dict.pop("dependents", [])
         user_id = str(uuid4())
+        create_user_dict["password"] = create_user_dict["cpf"]
         await User.objects.create(
-            id=user_id, **create_user_dict, status=UserStatus.active
+            id=user_id, **create_user_dict, status=UserStatus.analyzing
         )
         if dependents:
             await Dependent.objects.bulk_create(
@@ -102,6 +93,20 @@ async def disable_user(user_id: str) -> None:
         user = await User.objects.get(id=user_id)
         await user.update(status=UserStatus.inactive)
         return {"detail": "User disabled successfully"}
+    except Exception:
+        logging.error("User not found", exc_info=True)
+        raise HTTPException(
+            status_code=404,
+            detail="User not found",
+        )
+
+
+@router.patch("/{user_id}/enable")
+async def enable_user(user_id: str) -> None:
+    try:
+        user = await User.objects.get(id=user_id)
+        await user.update(status=UserStatus.active)
+        return {"detail": "User enable successfully"}
     except Exception:
         logging.error("User not found", exc_info=True)
         raise HTTPException(

@@ -29,14 +29,8 @@ def generate_affiliation_file(user: User):
     docx_replace(
         doc,
         **{
-            "cpf": user.cpf[:3]
-            + "."
-            + user.cpf[3:6]
-            + "."
-            + user.cpf[6:9]
-            + "-"
-            + user.cpf[9:],
-            "name": user.name,
+            "cpf": user.cpf,
+            "name": user.fullName,
             "date": date_string,
         },
     )
