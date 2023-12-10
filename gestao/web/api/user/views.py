@@ -3,11 +3,10 @@ from typing import List
 from uuid import uuid4
 
 from asyncpg.exceptions import UniqueViolationError
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, HTTPException
 
 from gestao.db.models.dependent import Dependent
 from gestao.db.models.user import User
-from gestao.web.api.login.utils import generate_password, send_email
 from gestao.web.api.user.enums import UserStatus
 from gestao.web.api.user.schemas import CreateUserDTO, UpdateUserDTO
 
@@ -45,15 +44,7 @@ async def create_user(request: Request, create_user: CreateUserDTO) -> User:
         create_user_dict = create_user.dict()
         dependents = create_user_dict.pop("dependents", [])
         user_id = str(uuid4())
-        user_password = generate_password()
-        create_user_dict["password"] = user_password
-        url_logo = str(request.url_for("static", path="logo.png"))
-        send_email(
-            create_user_dict["fullName"],
-            create_user_dict["email"],
-            user_password,
-            url_logo,
-        )
+        create_user_dict["password"] = create_user_dict["cpf"]
         await User.objects.create(
             id=user_id, **create_user_dict, status=UserStatus.analyzing
         )
