@@ -39,7 +39,7 @@ async def get_user(user_id: str) -> User:
 
 
 @router.post("/", response_model_exclude={"dependents__user_id"})
-async def create_user(request: Request, create_user: CreateUserDTO) -> User:
+async def create_user(create_user: CreateUserDTO) -> User:
     try:
         create_user_dict = create_user.dict()
         dependents = create_user_dict.pop("dependents", [])
