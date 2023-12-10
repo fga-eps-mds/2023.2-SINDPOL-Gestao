@@ -19,10 +19,10 @@ async def get_users(
     offset: int = 0,
 ) -> List[User]:
     return (
-        await User.objects.limit(limit).offset(
+        await User.objects.limit(limit)
+        .offset(
             offset,
         )
-        # .filter(status=UserStatus.active)
         .all()
     )
 
@@ -44,9 +44,7 @@ async def create_user(create_user: CreateUserDTO) -> User:
         create_user_dict = create_user.dict()
         dependents = create_user_dict.pop("dependents", [])
         user_id = str(uuid4())
-
-        create_user_dict["password"] = create_user_dict["warName"]
-
+        create_user_dict["password"] = create_user_dict["cpf"]
         await User.objects.create(
             id=user_id, **create_user_dict, status=UserStatus.analyzing
         )

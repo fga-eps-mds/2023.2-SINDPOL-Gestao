@@ -25,7 +25,6 @@ def generate_fake_user():
         "scolarity": "null",
         "religion": "null",
         "bloodType": "null",
-        "function": "null",
         "actualWorkSituation": "null",
         "admissionDate": "2023-01-01",
         "systemRole": "null",

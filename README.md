@@ -71,6 +71,7 @@ EMAIL_ADDRESS= "YOUR-EMAIL-ADDRESS"
 EMAIL_APP_PASSWORD= "YOUR-EMAIL-PASSWORD-FOR-APPs"
 ```
 
+[how to generate email password for apps](https://support.google.com/mail/answer/185833?hl=en)  
 You can read more about BaseSettings class here: https://pydantic-docs.helpmanual.io/usage/settings/
 
 ## Pre-commit
